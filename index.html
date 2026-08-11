@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แดชบอร์ดสวนสาธารณะ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7fcf9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0d9669;
+      --accent-soft: rgba(13,150,105,.14);
+      --accent2: #d4724a;
+      --accent2-soft: rgba(212,114,74,.14);
+      --border: rgba(15,23,42,.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(800px 400px at 20% -10%, var(--accent-soft), transparent 70%), var(--bg);
+      color: var(--text);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .6s ease forwards;
+    }
+    .reveal:nth-child(2) { animation-delay: .1s; }
+    .reveal:nth-child(3) { animation-delay: .2s; }
+    .reveal:nth-child(4) { animation-delay: .3s; }
+    .reveal:nth-child(5) { animation-delay: .4s; }
+    .reveal:nth-child(6) { animation-delay: .5s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .metric-card {
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+    .tbl-row {
+      transition: background .15s ease;
+    }
+    .tbl-row:hover {
+      background: rgba(128,128,128,.06);
+    }
+    .map-dot {
+      cursor: pointer;
+      transition: r .2s ease;
+    }
+    .map-dot:hover {
+      r: 9;
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-6xl mx-auto px-6 py-12">
+
+    <!-- SECTION 1: Hero -->
+    <div class="reveal mb-14">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div>
+          <p style="font-family:monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)">สวนสาธารณะ · ติดตามสภาพแวดล้อม</p>
+          <h1 class="text-4xl font-bold" style="color:var(--text);letter-spacing:-0.02em;line-height:1.15">แดชบอร์ดสวนสาธารณะ</h1>
+        </div>
+      </div>
+      <p style="color:var(--muted);max-width:600px" class="text-base mt-3">ติดตามสภาพอากาศ คุณภาพอากาศ จุดต้นไม้ที่ปล่อยออกซิเจน จำนวนผู้มาเยือน และพื้นที่ที่กำลังปรับปรุง — อัปเดตทุก 15 นาที</p>
+      <div class="mt-4 flex items-center gap-3 flex-wrap">
+        <span style="padding:4px 12px;border-radius:20px;background:var(--accent-soft);color:var(--text);border:1px solid var(--accent);font-size:12px;font-weight:600;">
+          <span style="color:var(--accent)">●</span> สภาพดีเหมาะกับการพักผ่อน
+        </span>
+        <span style="font-size:12px;color:var(--muted)">อัปเดตล่าสุด: 12 สิงหาคม 2569 · 14:30 น.</span>
+        <span style="font-size:12px;color:var(--accent2);font-weight:600">ข้อมูลตัวอย่างสำหรับการแสดงผล</span>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Metric Cards -->
+    <div class="reveal flex flex-wrap gap-4 mb-14">
+      <!-- UV Index -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(212,114,74,.14);display:flex;align-items:center;justify-content:center;color:var(--accent2);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">ดัชนี UV</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">6</div>
+        <div class="text-xs mt-1 font-medium" style="color:var(--accent2)">สูง · แนะนำใช้ครีมกันแดด</div>
+      </div>
+
+      <!-- PM2.5 -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h.01M7 12h.01M11 12h.01M15 12h.01M19 12h.01M3 16h.01M7 16h.01M11 16h.01M15 16h.01M19 16h.01M3 8h.01M7 8h.01M11 8h.01M15 8h.01M19 8h.01"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">PM2.5</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">28 <span style="font-size:14px;color:var(--muted)">μg/m³</span></div>
+        <div class="text-xs mt-1 font-medium" style="color:var(--accent)">ปานกลาง · เหมาะกับกิจกรรมกลางแจ้ง</div>
+      </div>
+
+      <!-- Rain -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(13,148,136,.14);display:flex;align-items:center;justify-content:center;color:#0d9488;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 13v8M8 13v8M12 15v8M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">สถานะฝน</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">10%</div>
+        <div class="text-xs mt-1 font-medium" style="color:#0d9488">ไม่มีฝน · ท้องฟ้าแจ่มใส</div>
+      </div>
+
+      <!-- Wind Speed -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(37,99,171,.14);display:flex;align-items:center;justify-content:center;color:#2563ab;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2M17.73 7.73A2.5 2.5 0 1 1 19.5 12H2M3 12h12a2 2 0 1 1-2 2M4 16h11a2 2 0 1 1-2 2"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">ความเร็วลม</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">12 <span style="font-size:14px;color:var(--muted)">km/h</span></div>
+        <div class="text-xs mt-1 font-medium" style="color:#2563ab">ลมปานกลาง · ทิศตะวันออกเฉียงเหนือ</div>
+      </div>
+
+      <!-- People Count -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(186,59,91,.14);display:flex;align-items:center;justify-content:center;color:#ba3b5b;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">จำนวนคนในสวน</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">1,247</div>
+        <div class="text-xs mt-1 font-medium" style="color:#ba3b5b">ความหนาแน่นปานกลาง · 62% ความจุ</div>
+      </div>
+
+      <!-- Temperature -->
+      <div class="metric-card backdrop-blur rounded-2xl p-5" style="flex:1 1 180px;background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(220,74,56,.14);display:flex;align-items:center;justify-content:center;color:#dc4a38;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+          </div>
+          <div style="color:var(--muted)" class="text-xs uppercase tracking-wide font-medium">อุณหภูมิ</div>
+        </div>
+        <div style="color:var(--text)" class="text-3xl font-bold">32<span style="font-size:14px;color:var(--muted)">°C</span></div>
+        <div class="text-xs mt-1 font-medium" style="color:#dc4a38">ร้อน · ความชื้น 68%</div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Map + Chart Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      
+      <!-- Park Map -->
+      <div class="reveal rounded-2xl p-6" style="background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <h2 class="text-xl font-semibold" style="color:var(--text)">แผนที่สวนสาธารณะ</h2>
+          <div class="flex gap-3 text-xs flex-wrap">
+            <span style="display:flex;align-items:center;gap:4px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:50%;background:var(--accent)"></span>ออกซิเจนสูง</span>
+            <span style="display:flex;align-items:center;gap:4px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:50%;background:#60a5fa"></span>ออกซิเจนปานกลาง</span>
+            <span style="display:flex;align-items:center;gap:4px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:50%;background:var(--accent2)"></span>กำลังปรับปรุง</span>
+            <span style="display:flex;align-items:center;gap:4px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:50%;background:#ba3b5b"></span>จุดตรวจวัด</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 500 320" style="width:100%;height:auto;border-radius:12px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">
+          <rect x="10" y="10" width="480" height="300" rx="12" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6,4"/>
+          <path d="M10 160 Q125 140 250 160 T490 160" stroke="#d7ccc8" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M250 10 Q230 100 250 160 Q270 220 250 310" stroke="#d7ccc8" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <ellipse cx="380" cy="90" rx="60" ry="35" fill="#81d4fa" opacity="0.7"/>
+          <text x="380" y="95" text-anchor="middle" fill="#01579b" font-size="11" font-weight="600">สระน้ำ</text>
+          <rect x="60" y="220" width="80" height="60" rx="8" fill="#ffe0b2" stroke="#f57c00" stroke-width="1.5"/>
+          <text x="100" y="255" text-anchor="middle" fill="#e65100" font-size="10" font-weight="600">สนามเด็ก</text>
+          <rect x="340" y="220" width="100" height="60" rx="8" fill="#c5e1a5" stroke="#558b2f" stroke-width="1.5"/>
+          <text x="390" y="255" text-anchor="middle" fill="#33691e" font-size="10" font-weight="600">สวนออกกำลังกาย</text>
+          <circle class="map-dot" cx="140" cy="70" r="7" fill="var(--accent)" onclick="showTreeInfo('ย่านต้นไม้ใหญ่', 'สูงมาก', '95%')"/>
+          <circle class="map-dot" cx="180" cy="100" r="6" fill="var(--accent)" onclick="showTreeInfo('ป่าไม้เขียวขจี', 'สูงมาก', '92%')"/>
+          <circle class="map-dot" cx="80" cy="120" r="6" fill="var(--accent)" onclick="showTreeInfo('พื้นที่ร่มเงา', 'สูง', '88%')"/>
+          <circle class="map-dot" cx="300" cy="80" r="5" fill="#60a5fa" onclick="showTreeInfo('แปลงไม้ประดับ', 'ปานกลาง', '72%')"/>
+          <circle class="map-dot" cx="420" cy="180" r="5" fill="#60a5fa" onclick="showTreeInfo('แถวต้นไม้ริมทาง', 'ปานกลาง', '68%')"/>
+          <circle class="map-dot" cx="150" cy="200" r="5" fill="#60a5fa" onclick="showTreeInfo('สวนดอกไม้', 'ปานกลาง', '65%')"/>
+          <circle class="map-dot" cx="320" cy="250" r="5" fill="#60a5fa" onclick="showTreeInfo('พื้นที่พักผ่อน', 'ปานกลาง', '70%')"/>
+          <rect x="200" y="40" width="50" height="35" rx="4" fill="var(--accent2)" opacity="0.8" onclick="showConstructionInfo('การปรับปรุงทางเดิน', '15 ส.ค. - 30 ก.ย. 69')"/>
+          <text x="225" y="62" text-anchor="middle" fill="white" font-size="9" font-weight="700">ปรับปรุง</text>
+          <rect x="420" cy="250" width="55" height="35" rx="4" fill="var(--accent2)" opacity="0.8" onclick="showConstructionInfo('ติดตั้งเฉลียงใหม่', '1 ส.ค. - 20 ส.ค. 69')"/>
+          <text x="447" y="272" text-anchor="middle" fill="white" font-size="9" font-weight="700">ปรับปรุง</text>
+          <circle cx="250" cy="160" r="6" fill="#ba3b5b" stroke="white" stroke-width="2"/>
+          <text x="250" y="180" text-anchor="middle" fill="#ba3b5b" font-size="9" font-weight="700">เซนเซอร์</text>
+          <rect x="230" y="300" width="40" height="15" rx="3" fill="#795548"/>
+          <text x="250" y="310" text-anchor="middle" fill="white" font-size="9" font-weight="600">ทางเข้า</text>
+        </svg>
+        <p class="text-xs mt-3" style="color:var(--muted)">* คลิกที่จุดบนแผนที่เพื่อดูรายละเอียด</p>
+        <div id="mapInfo" class="mt-3 p-3 rounded-lg text-sm" style="background:var(--accent-soft);color:var(--text);display:none"></div>
+      </div>
+
+      <!-- Trend Chart -->
+      <div class="reveal rounded-2xl p-6" style="background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <h2 class="text-xl font-semibold mb-4" style="color:var(--text)">แนวโน้มสภาพอากาศวันนี้</h2>
+        <div id="chart1" style="height:340px;width:100%"></div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Tree Oxygen Table + Construction Status -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      
+      <!-- Tree Oxygen Table -->
+      <div class="reveal rounded-2xl p-6 lg:col-span-2" style="background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <h2 class="text-xl font-semibold mb-4" style="color:var(--text)">จุดต้นไม้และระดับออกซิเจน</h2>
+        <table class="w-full text-sm">
+          <thead>
+            <tr style="color:var(--muted);border-bottom:1px solid var(--border)" class="text-xs uppercase tracking-wide">
+              <th class="text-left pb-3 font-medium">ชื่อย่าน</th>
+              <th class="text-left pb-3 font-medium">ชนิดไม้</th>
+              <th class="text-left pb-3 font-medium">ระดับออกซิเจน</th>
+              <th class="text-left pb-3 font-medium">คะแนน</th>
+              <th class="text-left pb-3 font-medium">แนะนำ</th>
+            </tr>
+          </thead>
+          <tbody style="color:var(--text)">
+            <tr class="tbl-row" style="border-bottom:1px solid var(--border)">
+              <td class="py-3 font-medium">ย่านต้นไม้ใหญ่</td>
+              <td class="py-3">สุพรรณิการ์, มะฮอกกานี</td>
+              <td class="py-3"><span style="display:inline-block;padding:2px 10px;border-radius:20px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:11px">สูงมาก</span></td>
+              <td class="py-3 font-bold" style="color:var(--accent)">95%</td>
+              <td class="py-3" style="color:var(--muted)">เหมาะสำหรับพักผ่อนหายใจลึก</td>
+            </tr>
+            <tr class="tbl-row" style="border-bottom:1px solid var(--border)">
+              <td class="py-3 font-medium">ป่าไม้เขียวขจี</td>
+              <td class="py-3">ไทร, ตะเคียน</td>
+              <td class="py-3"><span style="display:inline-block;padding:2px 10px;border-radius:20px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:11px">สูงมาก</span></td>
+              <td class="py-3 font-bold" style="color:var(--accent)">92%</td>
+              <td class="py-3" style="color:var(--muted)">จุดนั่งเล่นและออกกำลังกาย</td>
+            </tr>
+            <tr class="tbl-row" style="border-bottom:1px solid var(--border)">
+              <td class="py-3 font-medium">พื้นที่ร่มเงา</td>
+              <td class="py-3">มะม่วง, ลำไย</td>
+              <td class="py-3"><span style="display:inline-block;padding:2px 10px;border-radius:20px;background:rgba(13,150,105,.14);color:var(--accent);font-weight:600;font-size:11px">สูง</span></td>
+              <td class="py-3 font-bold" style="color:var(--accent)">88%</td>
+              <td class="py-3" style="color:var(--muted)">เหมาะสำหรับปิกนิก</td>
+            </tr>
+            <tr class="tbl-row" style="border-bottom:1px solid var(--border)">
+              <td class="py-3 font-medium">แปลงไม้ประดับ</td>
+              <td class="py-3">บอน, ฟอร์จูน</td>
+              <td class="py-3"><span style="display:inline-block;padding:2px 10px;border-radius:20px;background:rgba(96,165,250,.14);color:#2563ab;font-weight:600;font-size:11px">ปานกลาง</span></td>
+              <td class="py-3 font-bold" style="color:#2563ab">72%</td>
+              <td class="py-3" style="color:var(--muted)">ชมความสวยงาม ถ่ายรูป</td>
+            </tr>
+            <tr class="tbl-row">
+              <td class="py-3 font-medium">แถวต้นไม้ริมทาง</td>
+              <td class="py-3">รถถัง, สาลี่</td>
+              <td class="py-3"><span style="display:inline-block;padding:2px 10px;border-radius:20px;background:rgba(96,165,250,.14);color:#2563ab;font-weight:600;font-size:11px">ปานกลาง</span></td>
+              <td class="py-3 font-bold" style="color:#2563ab">68%</td>
+              <td class="py-3" style="color:var(--muted)">ให้ร่มเงาแก่ผู้เดิน</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Construction Status -->
+      <div class="reveal rounded-2xl p-6" style="background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <h2 class="text-xl font-semibold mb-4" style="color:var(--text)">พื้นที่กำลังปรับปรุง</h2>
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl" style="background:var(--accent2-soft);border-left:3px solid var(--accent2)">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="font-semibold" style="color:var(--text)">การปรับปรุงทางเดิน</p>
+                <p class="text-xs mt-1" style="color:var(--muted)">ย่านป่าไม้เขียวขจี</p>
+              </div>
+              <span style="font-size:10px;padding:2px 8px;border-radius:12px;background:var(--accent2);color:white;font-weight:600">กำลังดำเนิน</span>
+            </div>
+            <div class="mt-3">
+              <div style="height:6px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden">
+                <div style="height:100%;width:65%;background:var(--accent2);border-radius:3px"></div>
+              </div>
+              <div class="flex justify-between text-xs mt-1" style="color:var(--muted)">
+                <span>ความคืบหน้า 65%</span>
+                <span>ครบ 30 ก.ย. 69</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 rounded-xl" style="background:var(--accent2-soft);border-left:3px solid var(--accent2)">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="font-semibold" style="color:var(--text)">ติดตั้งเฉลียงใหม่</p>
+                <p class="text-xs mt-1" style="color:var(--muted)">ย่านสวนออกกำลังกาย</p>
+              </div>
+              <span style="font-size:10px;padding:2px 8px;border-radius:12px;background:var(--accent2);color:white;font-weight:600">กำลังดำเนิน</span>
+            </div>
+            <div class="mt-3">
+              <div style="height:6px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden">
+                <div style="height:100%;width:85%;background:var(--accent2);border-radius:3px"></div>
+              </div>
+              <div class="flex justify-between text-xs mt-1" style="color:var(--muted)">
+                <span>ความคืบหน้า 85%</span>
+                <span>ครบ 20 ส.ค. 69</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 rounded-xl" style="background:rgba(96,165,250,.1);border-left:3px solid #60a5fa">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="font-semibold" style="color:var(--text)">เพิ่มแสงสว่าง</p>
+                <p class="text-xs mt-1" style="color:var(--muted)">รอบสระน้ำ</p>
+              </div>
+              <span style="font-size:10px;padding:2px 8px;border-radius:12px;background:#60a5fa;color:white;font-weight:600">เร็วๆ นี้</span>
+            </div>
+            <p class="text-xs mt-2" style="color:var(--muted)">วางแผนเริ่ม: 1 ตุลาคม 2569</p>
+          </div>
+        </div>
+        <div class="mt-4 pt-4" style="border-top:1px solid var(--border)">
+          <p class="text-xs" style="color:var(--muted)">ขออภัยในความไม่สะดวก ขอความร่วมมือหลีกเลี่ยงพื้นที่ที่กำลังปรับปรุงเพื่อความปลอดภัย</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-16 pt-6" style="border-top:1px solid var(--border)">
+      <p class="text-center text-xs" style="color:var(--muted)">แดชบอร์ดสวนสาธารณะ · ข้อมูลจากเซนเซอร์อัจฉริยะ · ออกแบบเพื่อผู้ใช้ทั่วไป</p>
+    </div>
+  </div>
+
+  <!-- สคริปต์แผนภูมิ -->
+  <script>
+  (function init(n){
+    try {
+      var el=document.getElementById('chart1'); if(!el)return;
+      if(typeof echarts==='undefined'){
+        if(n<40){setTimeout(function(){init(n+1)},250);return;}
+        el.textContent='Chart library failed to load';return;
+      }
+      var c = echarts.init(el);
+      var st=getComputedStyle(document.documentElement);
+      var accent=st.getPropertyValue('--accent').trim()||'#0d9669';
+      var accent2=st.getPropertyValue('--accent2').trim()||'#d4724a';
+      var muted=st.getPropertyValue('--muted').trim()||'#64748b';
+      var card=st.getPropertyValue('--card').trim()||'#ffffff';
+      var text=st.getPropertyValue('--text').trim()||'#0f172a';
+      var border=st.getPropertyValue('--border').trim()||'rgba(15,23,42,.08)';
+      
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{trigger:'axis',backgroundColor:card,borderColor:border,textStyle:{color:text}},
+        legend:{data:['อุณหภูมิ (°C)','PM2.5 (μg/m³)','ดัชนี UV'],textStyle:{color:muted,fontSize:11},top:0},
+        grid:{left:'3%',right:'4%',bottom:'3%',top:'18%',containLabel:true},
+        xAxis:{type:'category',data:['06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00'],axisLabel:{color:muted,fontSize:10},axisTick:{show:false}},
+        yAxis:[
+          {type:'value',name:'อุณหภูมิ/UV',nameTextStyle:{color:muted,fontSize:10},axisLabel:{color:muted,fontSize:10},splitLine:{lineStyle:{color:border}},scale:true},
+          {type:'value',name:'PM2.5',nameTextStyle:{color:muted,fontSize:10},axisLabel:{color:muted,fontSize:10},splitLine:{show:false},scale:true}
+        ],
+        series:[
+          {name:'อุณหภูมิ (°C)',type:'line',data:[26,28,30,32,33,32,30,28],smooth:true,lineStyle:{color:accent2,width:2.5},itemStyle:{color:accent2},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:accent2+'40'},{offset:1,color:accent2+'08'}]}}},
+          {name:'PM2.5 (μg/m³)',type:'line',yAxisIndex:1,data:[22,25,28,30,28,26,24,22],smooth:true,lineStyle:{color:accent,width:2.5},itemStyle:{color:accent}},
+          {name:'ดัชนี UV',type:'line',data:[1,3,5,7,6,4,2,0],smooth:true,lineStyle:{color:'#2563ab',width:2,type:'dashed'},itemStyle:{color:'#2563ab'}}
+        ]
+      });
+      window.addEventListener('resize',function(){c.resize()});
+    } catch(e){console.error(e)}
+  })(0);
+  </script>
+
+  <!-- สคริปต์แผนที่โต้ตอบ -->
+  <script>
+  function showTreeInfo(name, level, score){
+    var info = document.getElementById('mapInfo');
+    info.style.display = 'block';
+    info.style.background = 'var(--accent-soft)';
+    info.innerHTML = '<strong style="color:var(--accent)">' + name + '</strong> · ระดับออกซิเจน: ' + level + ' (' + score + ') · แนะนำ: เหมาะสำหรับพักผ่อนและหายใจลึกที่สุด';
+  }
+  function showConstructionInfo(name, period){
+    var info = document.getElementById('mapInfo');
+    info.style.display = 'block';
+    info.style.background = 'var(--accent2-soft)';
+    info.innerHTML = '<strong style="color:var(--accent2)">' + name + '</strong> · ระยะเวลา: ' + period + ' · ขอความร่วมมือหลีกเลี่ยงพื้นที่นี้';
+  }
+  </script>
+</body>
+</html>
